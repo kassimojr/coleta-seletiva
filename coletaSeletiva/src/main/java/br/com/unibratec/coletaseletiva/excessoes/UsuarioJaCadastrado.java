@@ -1,9 +1,9 @@
 package br.com.unibratec.coletaseletiva.excessoes;
 
-public class EmailJaCadastrado extends Exception {
+public class UsuarioJaCadastrado extends Exception {
 	private static final long serialVersionUID = -1538912770439553702L;
 	
-	public EmailJaCadastrado(String string) {
+	public UsuarioJaCadastrado(String string) {
 		super(string);
 	}
 
