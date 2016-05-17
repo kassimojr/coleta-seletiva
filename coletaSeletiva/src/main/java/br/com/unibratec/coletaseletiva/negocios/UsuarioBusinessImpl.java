@@ -11,7 +11,7 @@ import br.com.unibratec.coletaseletiva.excessoes.UsuarioInexistenteException;
 import br.com.unibratec.coletaseletiva.persistencia.RepositorioUsuarios;
 
 @Service
-public class UsuarioBusinessImpl {
+public class UsuarioBusinessImpl implements UsuarioBusiness{
 	
 	@Autowired private RepositorioUsuarios usuarios; 
 	
