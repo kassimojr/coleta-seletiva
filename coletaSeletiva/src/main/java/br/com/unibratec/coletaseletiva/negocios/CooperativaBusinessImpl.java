@@ -6,40 +6,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.unibratec.coletaseletiva.entidades.Cooperativa;
-import br.com.unibratec.coletaseletiva.excessoes.CooperativaExistenteException;
-import br.com.unibratec.coletaseletiva.excessoes.CooperativaInexistenteException;
-import br.com.unibratec.coletaseletiva.persistencia.RepositorioCooperativas;
+import br.com.unibratec.coletaseletiva.excecoes.CooperativaExistenteException;
+import br.com.unibratec.coletaseletiva.excecoes.CooperativaInexistenteException;
+import br.com.unibratec.coletaseletiva.persistencia.CooperativaDAO;
 
 @Service
-public class CooperativaBusinessImpl implements CooperativaBusiness{
-	
-	@Autowired private RepositorioCooperativas cooperativas; 
-	
-	public List<Cooperativa> listarTodos(){
-		return (List<Cooperativa>) this.cooperativas.findAll();
+public class CooperativaBusinessImpl implements CooperativaBusiness {
+
+	@Autowired
+	private CooperativaDAO cooperativaDAO;
+
+	public List<Cooperativa> listarTodos() {
+		return (List<Cooperativa>) this.cooperativaDAO.findAll();
 	}
-	
-	public Cooperativa buscarCooperativa(String cnpj) throws CooperativaInexistenteException{
-		Cooperativa cooperativa = this.cooperativas.findByCnpj(cnpj);
+
+	public Cooperativa buscarCooperativa(String cnpj) throws CooperativaInexistenteException {
+		Cooperativa cooperativa = this.cooperativaDAO.findByCnpj(cnpj);
 		if (cooperativa == null) {
 			throw new CooperativaInexistenteException();
 		}
 		return cooperativa;
 	}
-	
+
 	public void remover(String cnpj) throws CooperativaInexistenteException {
 		Cooperativa cooperativa = buscarCooperativa(cnpj);
-		this.cooperativas.delete(cooperativa);
+		this.cooperativaDAO.delete(cooperativa);
 	}
-	
-	public void salvar(Cooperativa cooperativa) throws CooperativaExistenteException{
+
+	public void salvar(Cooperativa cooperativa) throws CooperativaExistenteException {
 		verificaCnpjCadastrado(cooperativa);
-		cooperativas.save(cooperativa);
+		cooperativaDAO.save(cooperativa);
 	}
-	
-	private void verificaCnpjCadastrado(Cooperativa cooperativa) throws CooperativaExistenteException{
-		Cooperativa cnpj = cooperativas.findByCnpj(cooperativa.getCnpj());		
-		if(cnpj!=null && !cnpj.equals(cooperativa))
+
+	private void verificaCnpjCadastrado(Cooperativa cooperativa) throws CooperativaExistenteException {
+		Cooperativa cnpj = cooperativaDAO.findByCnpj(cooperativa.getCnpj());
+		if (cnpj != null && !cnpj.equals(cooperativa))
 			throw new CooperativaExistenteException("O CNPJ informado já existe!");
 	}
 
