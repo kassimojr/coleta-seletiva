@@ -3,14 +3,18 @@ package br.com.unibratec.coletaseletiva.negocios;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import br.com.unibratec.coletaseletiva.entidades.Coleta;
 import br.com.unibratec.coletaseletiva.entidades.Cooperativa;
 import br.com.unibratec.coletaseletiva.entidades.Usuario;
 import br.com.unibratec.coletaseletiva.excecoes.CooperativaExistenteException;
 import br.com.unibratec.coletaseletiva.excecoes.CooperativaInexistenteException;
 import br.com.unibratec.coletaseletiva.excecoes.EmailJaCadastradoException;
 import br.com.unibratec.coletaseletiva.excecoes.UsuarioInexistenteException;
+import br.com.unibratec.coletaseletiva.persistencia.ColetaDAO;
 
+@Service
 public class FachadaImpl implements Fachada{
 
 	@Autowired
@@ -18,6 +22,8 @@ public class FachadaImpl implements Fachada{
 	
 	@Autowired
 	private CooperativaBusiness cooperativa;
+	
+	//private ColetaBu
 	
 	@Override
 	public void salvarUsuario(Usuario usuario) throws EmailJaCadastradoException {
@@ -55,7 +61,12 @@ public class FachadaImpl implements Fachada{
 	}
 
 	@Override
-	public Usuario buscarCooperativa(String email) throws CooperativaInexistenteException {
-		return this.buscarCooperativa(email);
+	public Cooperativa buscarCooperativa(String email) throws CooperativaInexistenteException {
+		return this.cooperativa.buscarCooperativa(email);
+	}
+
+	@Override
+	public void salvarColeta(Coleta coleta) {
+	//	return this.
 	}
 }
