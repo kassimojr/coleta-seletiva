@@ -43,5 +43,4 @@ public class UsuarioBusinessImpl implements UsuarioBusiness{
 		if(usuarioEmail!=null && !usuarioEmail.equals(usuario))
 			throw new EmailJaCadastradoException("O Email informado já está sendo usado");
 	}
-
 }
