@@ -18,7 +18,6 @@ public class Cooperativa implements Serializable{
 	private String cnpj;
 	private String nomeFantasia;
 	private String email;
-	private Collection<Coleta> coletas;
 	private Endereco endereco;
 	
 	@Id
@@ -53,15 +52,6 @@ public class Cooperativa implements Serializable{
 	
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	
-	@OneToMany(mappedBy="cooperativa")
-	public Collection<Coleta> getColetas() {
-		return coletas;
-	}
-	
-	public void setColetas(Collection<Coleta> coletas) {
-		this.coletas = coletas;
 	}
 	
 	@Embedded

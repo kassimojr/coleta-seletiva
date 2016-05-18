@@ -24,7 +24,6 @@ public class Usuario implements Serializable {
 	private String telefone;
 	private String email;
 	private Endereco endereco;
-	private Collection<Coleta> coletas;
 
 	public Usuario() {
 		super();
@@ -71,13 +70,5 @@ public class Usuario implements Serializable {
 		this.endereco = endereco;
 	}
 
-	@OneToMany(mappedBy="usuario")
-	public Collection<Coleta> getColetas() {
-		return coletas;
-	}
-
-	public void setColetas(Collection<Coleta> coletas) {
-		this.coletas = coletas;
-	}
 
 }

@@ -23,7 +23,8 @@ public class FachadaImpl implements Fachada{
 	@Autowired
 	private CooperativaBusiness cooperativa;
 	
-	//private ColetaBu
+	@Autowired
+	private ColetaBusiness coleta;
 	
 	@Override
 	public void salvarUsuario(Usuario usuario) throws EmailJaCadastradoException {
@@ -57,7 +58,7 @@ public class FachadaImpl implements Fachada{
 
 	@Override
 	public List<Cooperativa> listarTodasCooperativas() {
-		return this.listarTodasCooperativas();
+		return this.cooperativa.listarTodos();
 	}
 
 	@Override
@@ -67,6 +68,6 @@ public class FachadaImpl implements Fachada{
 
 	@Override
 	public void salvarColeta(Coleta coleta) {
-	//	return this.
+		this.coleta.salvar(coleta);
 	}
 }

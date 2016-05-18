@@ -3,10 +3,12 @@ package br.com.unibratec.coletaseletiva.negocios;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.unibratec.coletaseletiva.entidades.Coleta;
 import br.com.unibratec.coletaseletiva.persistencia.ColetaDAO;
 
+@Service
 public class ColetaBusinessImpl implements ColetaBusiness{
 	@Autowired
 	private ColetaDAO coletaDAO;
