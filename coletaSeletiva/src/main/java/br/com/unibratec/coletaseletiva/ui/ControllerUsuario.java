@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.unibratec.coletaseletiva.entidades.Usuario;
 import br.com.unibratec.coletaseletiva.excecoes.EmailJaCadastradoException;
 import br.com.unibratec.coletaseletiva.excecoes.UsuarioInexistenteException;
-import br.com.unibratec.coletaseletiva.excecoes.UsuarioJaCadastradoException;
 import br.com.unibratec.coletaseletiva.negocios.Error;
 import br.com.unibratec.coletaseletiva.negocios.Fachada;
 
@@ -48,4 +47,15 @@ public class ControllerUsuario {
 			new ResponseEntity<Error>(new Error(1, e.getMessage()), HttpStatus.OK);
 		}
 	}
+	
+	@RequestMapping(value = "/buscar", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	 public  ResponseEntity<?> buscar(@RequestBody String codigo) {
+	  Usuario usuario = null;
+	  try {
+	   usuario = fachada.buscarUsuario(codigo);
+	  } catch (UsuarioInexistenteException e) {
+	   return new ResponseEntity<Error>(new Error(1, e.getMessage()), HttpStatus.OK);
+	  }
+	  return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+	 }
 }
