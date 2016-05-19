@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.unibratec.coletaseletiva.entidades.Usuario;
 import br.com.unibratec.coletaseletiva.excecoes.EmailJaCadastradoException;
+import br.com.unibratec.coletaseletiva.excecoes.UsuarioInexistenteException;
+import br.com.unibratec.coletaseletiva.excecoes.UsuarioJaCadastradoException;
 import br.com.unibratec.coletaseletiva.negocios.Error;
 import br.com.unibratec.coletaseletiva.negocios.Fachada;
 
@@ -21,20 +23,29 @@ import br.com.unibratec.coletaseletiva.negocios.Fachada;
 public class ControllerUsuario {
 	@Autowired
 	private Fachada fachada;
-	
-	@RequestMapping(method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> listarTodosUsuarios(){
-		
+
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> listarTodosUsuarios() {
+
 		return new ResponseEntity<List<Usuario>>(fachada.listarTodosUsuarios(), HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST , produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> salvar(@RequestBody Usuario usuario){
+
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> salvar(@RequestBody Usuario usuario) {
 		try {
 			fachada.salvarUsuario(usuario);
 			return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 		} catch (EmailJaCadastradoException e) {
-			return new ResponseEntity<Error>(new Error(1,e.getMessage()), HttpStatus.OK);
+			return new ResponseEntity<Error>(new Error(1, e.getMessage()), HttpStatus.OK);
 		}
-	}		
+	}
+
+	@RequestMapping(value = "/excluir", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void excluir(@RequestBody String usuario) {
+		try {
+			fachada.removerUsuario(usuario);
+		} catch (UsuarioInexistenteException e) {
+			new ResponseEntity<Error>(new Error(1, e.getMessage()), HttpStatus.OK);
+		}
+	}
 }

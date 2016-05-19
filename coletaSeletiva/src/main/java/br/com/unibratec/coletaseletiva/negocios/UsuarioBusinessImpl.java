@@ -20,16 +20,16 @@ public class UsuarioBusinessImpl implements UsuarioBusiness{
 		return (List<Usuario>) this.usuarioDAO.findAll();
 	}
 	
-	public Usuario buscarUsuario(String email) throws UsuarioInexistenteException{
-		Usuario usuario = this.usuarioDAO.findByEmail(email);
+	public Usuario buscarUsuario(String codigo) throws UsuarioInexistenteException{
+		Usuario usuario = this.usuarioDAO.findByCodigo(Long.parseLong(codigo));
 		if (usuario == null) {
 			throw new UsuarioInexistenteException();
 		}
 		return usuario;
 	}
 	
-	public void remover(String email) throws UsuarioInexistenteException {
-		Usuario usuario = buscarUsuario(email);
+	public void remover(String codigo) throws UsuarioInexistenteException {
+		Usuario usuario = buscarUsuario(codigo);
 		this.usuarioDAO.delete(usuario);
 	}
 	
