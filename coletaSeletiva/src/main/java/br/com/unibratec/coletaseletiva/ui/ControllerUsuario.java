@@ -39,6 +39,14 @@ public class ControllerUsuario {
 		}
 	}
 
+	@RequestMapping(value = "/editar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> editar(@RequestBody Usuario usuario) {
+		
+			fachada.editarUsuario(usuario);
+			return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+		
+	}
+	
 	@RequestMapping(value = "/excluir", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public void excluir(@RequestBody String usuario) {
 		try {
@@ -48,7 +56,7 @@ public class ControllerUsuario {
 		}
 	}
 	
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/buscar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	 public  ResponseEntity<?> buscar(@RequestBody String codigo) {
 	  Usuario usuario = null;
 	  try {

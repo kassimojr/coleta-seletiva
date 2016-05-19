@@ -11,4 +11,5 @@ public interface UsuarioBusiness {
 	public void remover(String email) throws UsuarioInexistenteException;
 	public Usuario buscarUsuario(String codigo) throws UsuarioInexistenteException;
 	public void salvar (Usuario usuario) throws EmailJaCadastradoException;
+	public void editar(Usuario usuario);
 }

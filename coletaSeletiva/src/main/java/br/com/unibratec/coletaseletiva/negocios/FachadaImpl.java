@@ -12,7 +12,6 @@ import br.com.unibratec.coletaseletiva.excecoes.CooperativaExistenteException;
 import br.com.unibratec.coletaseletiva.excecoes.CooperativaInexistenteException;
 import br.com.unibratec.coletaseletiva.excecoes.EmailJaCadastradoException;
 import br.com.unibratec.coletaseletiva.excecoes.UsuarioInexistenteException;
-import br.com.unibratec.coletaseletiva.persistencia.ColetaDAO;
 
 @Service
 public class FachadaImpl implements Fachada{
@@ -69,5 +68,10 @@ public class FachadaImpl implements Fachada{
 	@Override
 	public void salvarColeta(Coleta coleta) {
 		this.coleta.salvar(coleta);
+	}
+
+	@Override
+	public void editarUsuario(Usuario usuario) {
+		this.usuario.editar(usuario);
 	}
 }

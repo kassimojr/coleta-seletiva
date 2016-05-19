@@ -12,6 +12,7 @@ import br.com.unibratec.coletaseletiva.excecoes.UsuarioInexistenteException;
 
 public interface Fachada {
 	public void salvarUsuario(Usuario usuario) throws EmailJaCadastradoException;
+	public void editarUsuario(Usuario usuario);	
 	public void removerUsuario(String codigo) throws UsuarioInexistenteException;
 	public List<Usuario> listarTodosUsuarios();
 	public Usuario buscarUsuario(String email) throws UsuarioInexistenteException;

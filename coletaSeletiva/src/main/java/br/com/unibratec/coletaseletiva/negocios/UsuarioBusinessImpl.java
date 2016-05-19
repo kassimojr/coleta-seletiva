@@ -43,4 +43,15 @@ public class UsuarioBusinessImpl implements UsuarioBusiness{
 		if(usuarioEmail!=null && !usuarioEmail.equals(usuario))
 			throw new EmailJaCadastradoException("O Email informado já está sendo usado");
 	}
+
+	@Override
+	public void editar(Usuario usuario) {
+		Usuario user = usuarioDAO.findByCodigo(usuario.getCodigo());
+		user.setEmail(usuario.getEmail());
+		user.setEndereco(usuario.getEndereco());
+		user.setNome(usuario.getNome());
+		user.setTelefone(usuario.getTelefone());
+		
+		usuarioDAO.save(user);
+	}
 }
